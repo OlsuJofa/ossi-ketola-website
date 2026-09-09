@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSGOEmpire — Ossi Ketola</title>
+<meta name="description" content="CSGOEmpire, founded by Ossi Ketola.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CSGOEmpire — Ossi Ketola">
+<meta property="og:description" content="CSGOEmpire, founded by Ossi Ketola.">
+<meta property="og:image" content="../assets/press/headshot-suit.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CSGOEmpire — Ossi Ketola">
+<meta name="twitter:description" content="CSGOEmpire, founded by Ossi Ketola.">
+<meta name="twitter:image" content="../assets/press/headshot-suit.png">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&amp;family=Karla:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  /* CSGOEmpire page-scoped palette — the platform's actual brand colors (from the
+     official logo mark and a provided swatch reference): Galliano gold, White, and
+     Jade green, plus the logo's own charcoal. One flat charcoal ground throughout
+     (no shifting section tones), gold for accents/kickers, white reserved for a
+     single card surface, jade reserved for the one interactive accent. */
+  .cs-scope{
+    background:#363332;
+    --charcoal:#363332;
+    --line:#4a4643;
+    --mute:#a39e9a;
+    --gold:#e9b10e;
+    --white:#ffffff;
+    --jade:#01bf4d;
+  }
+
+  .cs-hero{
+    background:var(--charcoal);
+    padding:72px 0 56px;
+    color:var(--white);
+  }
+  .cs-back{
+    display:inline-block; margin-bottom:28px; font-family:var(--body); letter-spacing:0.02em; font-size:13px;
+    color:var(--mute); text-decoration:none;
+  }
+  .cs-back:hover{ color:var(--jade); }
+  .cs-title-row{ display:flex; align-items:center; gap:18px; }
+  .cs-title-logo{ width:52px; height:52px; flex-shrink:0; }
+  .cs-hero h1{
+    font-family:var(--body); font-weight:800; letter-spacing:-0.02em;
+    font-size:clamp(38px,6vw,58px); line-height:1.05; margin:0;
+  }
+  .cs-hero .lede{
+    max-width:56ch; font-size:18px; color:var(--mute); margin:22px 0 0; line-height:1.65;
+  }
+
+  .cs-divider{
+    height:14px;
+    background:var(--charcoal) url("assets/csgoempire/divider.svg") center / cover no-repeat;
+  }
+
+  .cs-body{ background:var(--charcoal); padding:64px 0 96px; }
+  .cs-panel{
+    background:var(--white); color:var(--charcoal);
+    padding:40px;
+  }
+  .cs-panel + .cs-panel{ margin-top:2px; }
+  .cs-panel .kicker{ font-family:var(--body); letter-spacing:0.02em; font-size:13px; color:var(--gold); }
+  .cs-panel h3{ font-family:var(--body); font-weight:700; font-size:20px; color:var(--charcoal); margin:8px 0 12px; }
+  .cs-panel p{ color:#5c5854; font-size:15.5px; line-height:1.6; margin:0; max-width:62ch; }
+  .cs-panel p + p{ margin-top:14px; }
+  .cs-panel p.cs-panel-note{ color:#9a7a00; font-size:13.5px; }
+
+  .cs-body-grid{ display:grid; grid-template-columns:1fr 280px; gap:2px 40px; align-items:start; }
+  .cs-main{ display:flex; flex-direction:column; }
+  .cs-side{ position:sticky; top:84px; display:flex; flex-direction:column; gap:16px; }
+  .cs-side-card{ background:var(--white); color:var(--charcoal); padding:28px; }
+  .cs-side-card .kicker{ display:block; font-family:var(--body); letter-spacing:0.02em; font-size:12px; color:var(--gold); }
+  .cs-side-line{ font-size:14px; margin:16px 0 0; line-height:1.4; color:#5c5854; }
+  .cs-side-line strong{
+    display:block; font-size:11px; text-transform:uppercase; letter-spacing:.04em;
+    color:#8a8580; font-weight:600; margin-bottom:2px;
+  }
+  .cs-side-fair-text{
+    font-size:13.5px; line-height:1.55; color:#5c5854; margin:14px 0 0;
+  }
+  .cs-side-fair-link{
+    display:inline-block; margin-top:20px; font-family:var(--body); letter-spacing:0.02em; font-size:16px;
+    color:var(--gold); text-decoration:none; font-weight:600;
+  }
+  .cs-side-fair-link:hover{ color:var(--jade); }
+  .cs-side-notice{
+    font-family:var(--body); letter-spacing:0.02em; font-size:12px; color:var(--mute); margin:0;
+    padding:16px 20px; border:1px solid var(--line);
+  }
+  @media (max-width:860px){
+    .cs-body-grid{ grid-template-columns:1fr; }
+    .cs-side{ position:static; margin-top:2px; }
+  }
+
+  /* CGA certificate badge — mirrors the real Curaçao Gaming Authority verification
+     seal (green card, CGA mark, cert.cga.cw), linked to the actual certificate.
+     Sits right in the licence card, next to the number it's verifying. */
+  .cga-badge{
+    display:inline-flex; flex-direction:column; align-items:center; justify-content:center;
+    vertical-align:middle; margin-left:10px;
+    width:64px; padding:9px 4px 7px; gap:2px; flex-shrink:0;
+    background:#0c6b45; border-radius:5px; text-decoration:none;
+    transition:background .15s ease;
+  }
+  .cga-badge:hover{ background:#0a5c3a; }
+  .cga-badge-title{
+    font-family:var(--body); font-weight:800; font-size:15px; line-height:1;
+    color:#fff; letter-spacing:0.01em;
+  }
+  .cga-badge-sub{
+    font-family:var(--body); font-size:7px; color:#fff; letter-spacing:0.01em;
+  }
+
+  /* CSGOEmpire wordmark button — same lockup as the Duel.com button (dark
+     brand-colored chip, bold rounded text, no arrow), bottom-centered. */
+  .cs-logo-btn-wrap{ display:flex; justify-content:center; margin:16px 0 0; }
+  .cs-logo-btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:9px 18px; border-radius:8px;
+    background:#242220; border:1px solid rgba(233,177,14,.4);
+    font-family:var(--body); font-weight:800; font-size:15px; letter-spacing:-0.01em;
+    color:#fff; text-decoration:none; transition:border-color .15s ease;
+  }
+  .cs-logo-btn:hover{ border-color:rgba(233,177,14,.8); }
+
+</style>
+</head>
+<body class="cs-scope">
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../index.html">
+      <svg viewBox="0 0 56.88 55.63" width="26" height="26">
+        <path fill="#0b0d10" fill-rule="evenodd" d="M27.99 0C27.99 0 29.12 0.25 29.12 0.25C29.12 0.25 29.74 2.38 29.74 2.38C29.74 2.38 32.16 2.5 32.74 2.63C33.33 2.75 33.18 2.83 33.24 3.13C33.31 3.42 33.12 4.38 33.12 4.38C33.12 4.38 30.85 4.5 30.24 4.63C29.64 4.75 29.64 4.52 29.49 5.13C29.35 5.73 29.31 7.58 29.37 8.25C29.43 8.92 29.39 8.73 29.87 9.13C30.35 9.52 31.52 9.83 32.24 10.63C32.97 11.42 33.87 12.29 34.24 13.88C34.62 15.46 34.49 20.13 34.49 20.13C34.49 20.13 34.22 20.69 35.37 20C36.52 19.31 39.74 16.85 41.37 16C43 15.15 43.89 15.08 45.12 14.88C46.35 14.67 47.41 14.5 48.75 14.75C50.08 15 52.04 15.75 53.12 16.38C54.2 17 54.68 17.71 55.25 18.5C55.81 19.29 56.22 20.21 56.5 21.13C56.77 22.04 56.93 22.9 56.87 24C56.81 25.1 57.52 25.23 56.12 27.75C54.72 30.27 49.85 36.25 48.5 39.13C47.14 42 48.04 42.94 48 45C47.95 47.06 48.39 50.23 48.25 51.5C48.1 52.77 48.31 52.08 47.12 52.63C45.93 53.17 43.06 54.25 41.12 54.75C39.18 55.25 38.85 55.48 35.49 55.63C32.14 55.77 24.31 55.77 20.99 55.63C17.68 55.48 17.58 55.27 15.62 54.75C13.66 54.23 10.45 53.08 9.24 52.5C8.04 51.92 8.47 52.71 8.37 51.25C8.27 49.79 8.66 45.81 8.62 43.75C8.58 41.69 9.35 41.33 8.12 38.88C6.89 36.42 2.58 31.1 1.24 29C-0.09 26.9 0.33 27.42 0.12 26.25C-0.09 25.08 -0.21 23.27 -0.01 22C0.2 20.73 0.72 19.6 1.37 18.63C2.02 17.65 2.89 16.75 3.87 16.13C4.85 15.5 6.08 15.1 7.24 14.88C8.41 14.65 9.58 14.58 10.87 14.75C12.16 14.92 13.12 14.98 15 15.88C16.87 16.77 22.12 20.13 22.12 20.13C22.12 20.13 22.27 15.04 22.62 13.5C22.97 11.96 23.62 11.54 24.24 10.88C24.87 10.21 25.83 10.02 26.37 9.5C26.91 8.98 27.33 8.48 27.49 7.75C27.66 7.02 27.49 5.65 27.37 5.13C27.24 4.6 27.37 4.75 26.74 4.63C26.12 4.5 23.62 4.38 23.62 4.38C23.62 4.38 23.43 3.42 23.49 3.13C23.56 2.83 23.43 2.73 23.99 2.63C24.56 2.52 26.87 2.5 26.87 2.5C26.87 2.5 27.99 0 27.99 0ZM46.5 16.88C45.39 17.06 43.52 17.6 42.25 18.13C40.97 18.65 40.35 18.83 38.87 20C37.39 21.17 34.77 23.42 33.37 25.13C31.97 26.83 31.08 28.88 30.49 30.25C29.91 31.63 29.89 32.56 29.87 33.38C29.85 34.19 30.37 35.13 30.37 35.13C30.37 35.13 35.37 35.5 37.87 35.88C40.37 36.25 43.91 37.13 45.37 37.38C46.83 37.63 46.29 37.48 46.62 37.38C46.95 37.27 46.89 37.46 47.37 36.75C47.85 36.04 48.5 34.56 49.5 33.13C50.5 31.69 52.56 29.38 53.37 28.13C54.18 26.88 54.18 26.46 54.37 25.63C54.56 24.79 54.56 23.92 54.5 23.13C54.43 22.33 54.39 21.65 54 20.88C53.6 20.1 52.97 19.15 52.12 18.5C51.27 17.85 49.81 17.27 48.87 17C47.93 16.73 47.6 16.69 46.5 16.88ZM8.37 16.88C7.58 17.04 6.31 17.44 5.49 17.88C4.68 18.31 4.02 18.83 3.49 19.5C2.97 20.17 2.58 20.96 2.37 21.88C2.16 22.79 2.06 23.92 2.24 25C2.43 26.08 2.68 27.04 3.49 28.38C4.31 29.71 6.12 31.56 7.12 33C8.12 34.44 8.79 36.27 9.49 37C10.2 37.73 9.83 37.56 11.37 37.38C12.91 37.19 16.24 36.25 18.74 35.88C21.24 35.5 26.37 35.13 26.37 35.13C26.37 35.13 26.89 34.42 26.87 33.63C26.85 32.83 26.7 31.6 26.24 30.38C25.79 29.15 24.89 27.44 24.12 26.25C23.35 25.06 22.64 24.27 21.62 23.25C20.6 22.23 19.14 20.96 17.99 20.13C16.85 19.29 16.04 18.79 14.75 18.25C13.45 17.71 11.31 17.1 10.25 16.88C9.18 16.65 9.16 16.71 8.37 16.88ZM26.62 37.63C23.99 37.63 22.97 37.54 20.49 37.88C18.02 38.21 13.37 39.1 11.75 39.63C10.12 40.15 10.89 40.42 10.75 41C10.6 41.58 10.75 42.6 10.87 43.13C11 43.65 11.5 44.13 11.5 44.13C11.5 44.13 14.06 43.27 16.37 42.88C18.68 42.48 21.91 41.83 25.37 41.75C28.83 41.67 33.93 41.98 37.12 42.38C40.31 42.77 43.06 43.94 44.5 44.13C45.93 44.31 45.75 43.5 45.75 43.5C45.75 43.5 46 41.02 45.87 40.38C45.75 39.73 46.6 40.04 45 39.63C43.39 39.21 39.31 38.21 36.24 37.88C33.18 37.54 29.24 37.63 26.62 37.63ZM25.24 48.38C22.52 48.38 21.99 48.52 20.12 48.88C18.24 49.23 15.12 50.15 14 50.5C12.87 50.85 13.37 51 13.37 51C13.37 51 13.14 51.35 13.62 51.63C14.1 51.9 14.89 52.35 16.24 52.63C17.6 52.9 19.08 53.13 21.74 53.25C24.41 53.38 29.12 53.48 32.24 53.38C35.37 53.27 38.64 52.96 40.49 52.63C42.35 52.29 43.37 51.38 43.37 51.38C43.37 51.38 43.77 50.92 42.62 50.5C41.47 50.08 39.39 49.23 36.49 48.88C33.6 48.52 27.97 48.38 25.24 48.38ZM27.74 11.13C26.95 11.29 25.99 12.35 25.49 12.88C24.99 13.4 24.89 13.21 24.74 14.25C24.6 15.29 24.14 16.77 24.62 19.13C25.1 21.48 26.95 26.77 27.62 28.38C28.29 29.98 28.62 28.75 28.62 28.75C28.62 28.75 31.41 21.69 31.99 19.38C32.58 17.06 32.41 16.13 32.12 14.88C31.83 13.63 30.97 12.5 30.24 11.88C29.52 11.25 28.54 10.96 27.74 11.13ZM25.62 44C22.62 44.33 15.54 45.46 13.12 46C10.7 46.54 11.47 46.88 11.12 47.25C10.77 47.63 10.91 48 11 48.25C11.08 48.5 9.33 49.13 11.62 48.75C13.91 48.38 21.31 46.46 24.74 46C28.18 45.54 29.37 45.69 32.24 46C35.12 46.31 39.97 47.42 42 47.88C44.02 48.33 43.75 48.69 44.37 48.75C45 48.81 45.75 48.25 45.75 48.25C45.75 48.25 46.04 47.35 45.25 46.88C44.45 46.4 43.35 45.85 41 45.38C38.64 44.9 33.68 44.23 31.12 44C28.56 43.77 28.62 43.67 25.62 44Z"/>
+      </svg>
+      <span class="wordmark">Ossi Ketola</span>
+    </a>
+    <nav class="site-nav">
+      <a href="../index.html">About</a>
+      <a href="../blog/index.html">Blog</a>
+      <div class="nav-dropdown">
+        <a href="index.html" aria-current="page">Companies</a>
+        <div class="nav-dropdown-menu">
+          <a href="duel.html">Duel.com</a>
+          <a href="csgoempire.html">CSGOEmpire</a>
+          <a href="castle.html">The Castle</a>
+        </div>
+      </div>
+      <a href="../social.html">Social</a>
+      <a href="../press.html">Press Kit</a>
+    </nav>
+  </div>
+</header>
+
+<section class="cs-hero">
+  <div class="wrap">
+    <a class="cs-back" href="index.html">&larr; Back to companies</a>
+    <div class="cs-title-row">
+      <img src="assets/csgoempire/logo.svg" alt="" class="cs-title-logo">
+      <h1>CSGOEmpire</h1>
+    </div>
+    <p class="lede">Play Roulette, Coinflip, Match betting, Cases &amp; Case Battles on the World&rsquo;s biggest Counter-Strike Skin gambling site.</p>
+  </div>
+</section>
+
+<div class="cs-divider"></div>
+
+<section class="cs-body">
+  <div class="wrap cs-body-grid">
+  <div class="cs-main">
+    <div class="cs-panel">
+      <span class="kicker">About the platform</span>
+      <h3>What CSGOEmpire is</h3>
+      <p>CSGOEmpire is a gambling site operated by Moonrail Limited B.V. Usually, CS:GO gambling sites have a bad reputation. CSGOEmpire&rsquo;s whole positioning is built against that: it&rsquo;s one of the first licensed and regulated skin gambling platforms, and every game runs on a provably fair system, meaning the outcome can be independently verified against a cryptographic seed after the fact. If a game were rigged, it wouldn&rsquo;t stay hidden &mdash; it would be traceable.</p>
+    </div>
+
+    <div class="cs-panel">
+      <span class="kicker">The differentiation</span>
+      <h3>Why players choose it over the alternatives</h3>
+      <p>Two things set CSGOEmpire apart. First, trust: it&rsquo;s widely regarded as the fairest operator in the space, partly because it actively scans competitor sites and pressures them to adopt transparent RNG too &mdash; not just talking about fairness, but pushing the whole industry toward it. Second, the trading system: since 2018, deposits and withdrawals run peer-to-peer instead of through Steam bots &mdash; a skin gets listed and auctioned for 3 minutes, the highest bidder wins, and the trade settles directly between players. That cuts out the indirect fees most competitors bury in bot-based trading. There&rsquo;s also a strict no-fake-bets policy &mdash; even sponsored streamers play with their own real money, not seeded balances, which isn&rsquo;t the norm in this industry.</p>
+    </div>
+
+    <div class="cs-panel">
+      <span class="kicker">How the money works</span>
+      <h3>Where the house edge actually sits</h3>
+      <p>CSGOEmpire doesn&rsquo;t charge anything on the trading itself &mdash; deposits and withdrawals are fee-free. The profit comes from the games: a 0.5% fee on Coinflip, and an 8.8% house edge on Cases. One Empire Coin is worth roughly $0.614.</p>
+      <p class="cs-panel-note">Figures as published on CSGOEmpire&rsquo;s own FAQ &mdash; worth rechecking before long-term reuse.</p>
+    </div>
+  </div>
+
+  <aside class="cs-side">
+    <div class="cs-side-card">
+      <span class="kicker">Fairness</span>
+      <p class="cs-side-fair-text">Every result is set before you place your bet &mdash; we publish a hash of it upfront, then reveal the real number after the round so you can check it matches. That&rsquo;s fairness here: not a promise, but something you can verify yourself, every time.</p>
+      <a class="cs-side-fair-link" href="https://csgoempire.com/fairness" target="_blank" rel="noopener noreferrer">csgoempire.com/fairness</a>
+    </div>
+
+    <div class="cs-side-card">
+      <span class="kicker">Licence</span>
+      <p class="cs-side-line"><strong>Operator</strong>Moonrail Limited B.V.</p>
+      <p class="cs-side-line"><strong>Jurisdiction</strong>Cura&ccedil;ao</p>
+      <p class="cs-side-line"><strong>Licence No.</strong>OGL/2024/1183/0869 <a class="cga-badge" href="https://cert.cga.cw/certificate?id=ZXlKcGRpSTZJbE5qYkZNdlkweGhRakp1Wm1KV2FWZHZhV0pCYzBFOVBTSXNJblpoYkhWbElqb2liVFIyYnpFM2NFRnZOR0ZDVG1GRlRWZDNkemRYVVQwOUlpd2liV0ZqSWpvaVlqQmtaamN4WlRKaVpUa3hPV1UyTWpVeU1tSmxNamd3WldSbE1UQXpOemhpWmpnek9UTmtaak15TnpJME1tRTRaVGxoTVRneU1XTXhaamRpTW1SbFlTSXNJblJoWnlJNklpSjk=" target="_blank" rel="noopener noreferrer" aria-label="View CSGOEmpire's Curaçao Gaming Authority certificate">
+        <span class="cga-badge-title">CGA</span>
+        <span class="cga-badge-sub">cert.cga.cw</span>
+      </a></p>
+      <div class="cs-logo-btn-wrap">
+        <a class="cs-logo-btn" href="https://csgoempire.com" target="_blank" rel="noopener noreferrer">CSGOEmpire</a>
+      </div>
+    </div>
+
+    <p class="cs-side-notice">18+ &mdash; Gambling can be addictive. Play responsibly.</p>
+  </aside>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="site-footer-top">
+      <a class="footer-brand" href="../index.html">
+        <svg viewBox="0 0 56.88 55.63" width="20" height="20">
+          <path fill="#0b0d10" fill-rule="evenodd" d="M27.99 0C27.99 0 29.12 0.25 29.12 0.25C29.12 0.25 29.74 2.38 29.74 2.38C29.74 2.38 32.16 2.5 32.74 2.63C33.33 2.75 33.18 2.83 33.24 3.13C33.31 3.42 33.12 4.38 33.12 4.38C33.12 4.38 30.85 4.5 30.24 4.63C29.64 4.75 29.64 4.52 29.49 5.13C29.35 5.73 29.31 7.58 29.37 8.25C29.43 8.92 29.39 8.73 29.87 9.13C30.35 9.52 31.52 9.83 32.24 10.63C32.97 11.42 33.87 12.29 34.24 13.88C34.62 15.46 34.49 20.13 34.49 20.13C34.49 20.13 34.22 20.69 35.37 20C36.52 19.31 39.74 16.85 41.37 16C43 15.15 43.89 15.08 45.12 14.88C46.35 14.67 47.41 14.5 48.75 14.75C50.08 15 52.04 15.75 53.12 16.38C54.2 17 54.68 17.71 55.25 18.5C55.81 19.29 56.22 20.21 56.5 21.13C56.77 22.04 56.93 22.9 56.87 24C56.81 25.1 57.52 25.23 56.12 27.75C54.72 30.27 49.85 36.25 48.5 39.13C47.14 42 48.04 42.94 48 45C47.95 47.06 48.39 50.23 48.25 51.5C48.1 52.77 48.31 52.08 47.12 52.63C45.93 53.17 43.06 54.25 41.12 54.75C39.18 55.25 38.85 55.48 35.49 55.63C32.14 55.77 24.31 55.77 20.99 55.63C17.68 55.48 17.58 55.27 15.62 54.75C13.66 54.23 10.45 53.08 9.24 52.5C8.04 51.92 8.47 52.71 8.37 51.25C8.27 49.79 8.66 45.81 8.62 43.75C8.58 41.69 9.35 41.33 8.12 38.88C6.89 36.42 2.58 31.1 1.24 29C-0.09 26.9 0.33 27.42 0.12 26.25C-0.09 25.08 -0.21 23.27 -0.01 22C0.2 20.73 0.72 19.6 1.37 18.63C2.02 17.65 2.89 16.75 3.87 16.13C4.85 15.5 6.08 15.1 7.24 14.88C8.41 14.65 9.58 14.58 10.87 14.75C12.16 14.92 13.12 14.98 15 15.88C16.87 16.77 22.12 20.13 22.12 20.13C22.12 20.13 22.27 15.04 22.62 13.5C22.97 11.96 23.62 11.54 24.24 10.88C24.87 10.21 25.83 10.02 26.37 9.5C26.91 8.98 27.33 8.48 27.49 7.75C27.66 7.02 27.49 5.65 27.37 5.13C27.24 4.6 27.37 4.75 26.74 4.63C26.12 4.5 23.62 4.38 23.62 4.38C23.62 4.38 23.43 3.42 23.49 3.13C23.56 2.83 23.43 2.73 23.99 2.63C24.56 2.52 26.87 2.5 26.87 2.5C26.87 2.5 27.99 0 27.99 0ZM46.5 16.88C45.39 17.06 43.52 17.6 42.25 18.13C40.97 18.65 40.35 18.83 38.87 20C37.39 21.17 34.77 23.42 33.37 25.13C31.97 26.83 31.08 28.88 30.49 30.25C29.91 31.63 29.89 32.56 29.87 33.38C29.85 34.19 30.37 35.13 30.37 35.13C30.37 35.13 35.37 35.5 37.87 35.88C40.37 36.25 43.91 37.13 45.37 37.38C46.83 37.63 46.29 37.48 46.62 37.38C46.95 37.27 46.89 37.46 47.37 36.75C47.85 36.04 48.5 34.56 49.5 33.13C50.5 31.69 52.56 29.38 53.37 28.13C54.18 26.88 54.18 26.46 54.37 25.63C54.56 24.79 54.56 23.92 54.5 23.13C54.43 22.33 54.39 21.65 54 20.88C53.6 20.1 52.97 19.15 52.12 18.5C51.27 17.85 49.81 17.27 48.87 17C47.93 16.73 47.6 16.69 46.5 16.88ZM8.37 16.88C7.58 17.04 6.31 17.44 5.49 17.88C4.68 18.31 4.02 18.83 3.49 19.5C2.97 20.17 2.58 20.96 2.37 21.88C2.16 22.79 2.06 23.92 2.24 25C2.43 26.08 2.68 27.04 3.49 28.38C4.31 29.71 6.12 31.56 7.12 33C8.12 34.44 8.79 36.27 9.49 37C10.2 37.73 9.83 37.56 11.37 37.38C12.91 37.19 16.24 36.25 18.74 35.88C21.24 35.5 26.37 35.13 26.37 35.13C26.37 35.13 26.89 34.42 26.87 33.63C26.85 32.83 26.7 31.6 26.24 30.38C25.79 29.15 24.89 27.44 24.12 26.25C23.35 25.06 22.64 24.27 21.62 23.25C20.6 22.23 19.14 20.96 17.99 20.13C16.85 19.29 16.04 18.79 14.75 18.25C13.45 17.71 11.31 17.1 10.25 16.88C9.18 16.65 9.16 16.71 8.37 16.88ZM26.62 37.63C23.99 37.63 22.97 37.54 20.49 37.88C18.02 38.21 13.37 39.1 11.75 39.63C10.12 40.15 10.89 40.42 10.75 41C10.6 41.58 10.75 42.6 10.87 43.13C11 43.65 11.5 44.13 11.5 44.13C11.5 44.13 14.06 43.27 16.37 42.88C18.68 42.48 21.91 41.83 25.37 41.75C28.83 41.67 33.93 41.98 37.12 42.38C40.31 42.77 43.06 43.94 44.5 44.13C45.93 44.31 45.75 43.5 45.75 43.5C45.75 43.5 46 41.02 45.87 40.38C45.75 39.73 46.6 40.04 45 39.63C43.39 39.21 39.31 38.21 36.24 37.88C33.18 37.54 29.24 37.63 26.62 37.63ZM25.24 48.38C22.52 48.38 21.99 48.52 20.12 48.88C18.24 49.23 15.12 50.15 14 50.5C12.87 50.85 13.37 51 13.37 51C13.37 51 13.14 51.35 13.62 51.63C14.1 51.9 14.89 52.35 16.24 52.63C17.6 52.9 19.08 53.13 21.74 53.25C24.41 53.38 29.12 53.48 32.24 53.38C35.37 53.27 38.64 52.96 40.49 52.63C42.35 52.29 43.37 51.38 43.37 51.38C43.37 51.38 43.77 50.92 42.62 50.5C41.47 50.08 39.39 49.23 36.49 48.88C33.6 48.52 27.97 48.38 25.24 48.38ZM27.74 11.13C26.95 11.29 25.99 12.35 25.49 12.88C24.99 13.4 24.89 13.21 24.74 14.25C24.6 15.29 24.14 16.77 24.62 19.13C25.1 21.48 26.95 26.77 27.62 28.38C28.29 29.98 28.62 28.75 28.62 28.75C28.62 28.75 31.41 21.69 31.99 19.38C32.58 17.06 32.41 16.13 32.12 14.88C31.83 13.63 30.97 12.5 30.24 11.88C29.52 11.25 28.54 10.96 27.74 11.13ZM25.62 44C22.62 44.33 15.54 45.46 13.12 46C10.7 46.54 11.47 46.88 11.12 47.25C10.77 47.63 10.91 48 11 48.25C11.08 48.5 9.33 49.13 11.62 48.75C13.91 48.38 21.31 46.46 24.74 46C28.18 45.54 29.37 45.69 32.24 46C35.12 46.31 39.97 47.42 42 47.88C44.02 48.33 43.75 48.69 44.37 48.75C45 48.81 45.75 48.25 45.75 48.25C45.75 48.25 46.04 47.35 45.25 46.88C44.45 46.4 43.35 45.85 41 45.38C38.64 44.9 33.68 44.23 31.12 44C28.56 43.77 28.62 43.67 25.62 44Z"/>
+        </svg>
+        <span>Ossi Ketola</span>
+      </a>
+      <nav class="site-footer-nav">
+        <a href="../index.html">About</a>
+        <a href="../blog/index.html">Blog</a>
+        <a href="index.html">Companies</a>
+        <a href="../social.html">Social</a>
+        <a href="../press.html">Press Kit</a>
+      </nav>
+    </div>
+    <div class="site-footer-bottom">&copy; 2026 Ossi Ketola.</div>
+  </div>
+</footer>
+
+</body>
+</html>

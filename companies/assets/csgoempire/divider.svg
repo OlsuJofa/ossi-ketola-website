@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="32" viewBox="0 0 1920 32" fill="none" xmlns:c2pa="http://c2pa.org/manifest">
+<defs><pattern id="cds" width="28" height="28" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="14" height="28" fill="#e9b10e" opacity=".9"></rect></pattern></defs>
+<rect width="1920" height="32" fill="#15161d"></rect>
+<rect width="1920" height="32" fill="url(#cds)"></rect>
+<rect width="1920" height="32" fill="#000000" opacity=".45"></rect>
+</svg>

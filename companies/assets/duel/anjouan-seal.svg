@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 132" role="img" aria-label="Anjouan Gaming Board verification seal — valid">
+  <path d="
+    M50,9
+    C47,9 44.5,6 39.5,6
+    C26,6 15,14.5 15,25.5
+    L15,53
+    C15,77 30,90.5 50,97.5
+    C70,90.5 85,77 85,53
+    L85,25.5
+    C85,14.5 74,6 60.5,6
+    C55.5,6 53,9 50,9
+    Z"
+    fill="#7f2233" stroke="#5c1622" stroke-width="1.5" stroke-linejoin="round"/>
+
+  <g fill="#ffffff">
+    <circle cx="42" cy="45" r="19"/>
+    <circle cx="50" cy="45" r="16" fill="#7f2233"/>
+  </g>
+  <g fill="#ffffff">
+    <polygon points="0,-2.5 0.56,-0.77 2.38,-0.77 0.9,0.29 1.47,2.02 0,0.95 -1.47,2.02 -0.9,0.29 -2.38,-0.77 -0.56,-0.77" transform="translate(57,35)"/>
+    <polygon points="0,-2.5 0.56,-0.77 2.38,-0.77 0.9,0.29 1.47,2.02 0,0.95 -1.47,2.02 -0.9,0.29 -2.38,-0.77 -0.56,-0.77" transform="translate(57,42.5)"/>
+    <polygon points="0,-2.5 0.56,-0.77 2.38,-0.77 0.9,0.29 1.47,2.02 0,0.95 -1.47,2.02 -0.9,0.29 -2.38,-0.77 -0.56,-0.77" transform="translate(57,50)"/>
+    <polygon points="0,-2.5 0.56,-0.77 2.38,-0.77 0.9,0.29 1.47,2.02 0,0.95 -1.47,2.02 -0.9,0.29 -2.38,-0.77 -0.56,-0.77" transform="translate(57,57.5)"/>
+  </g>
+
+  <circle cx="76.5" cy="21" r="18.5" fill="#22c55e" stroke="#000000" stroke-width="3.5"/>
+  <path d="M67.5,21.5 L74,28 L86,13.5" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="50" y="120" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="23" letter-spacing="1.5" fill="#22a559">VALID</text>
+</svg>
