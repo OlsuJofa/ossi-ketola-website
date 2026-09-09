@@ -119,7 +119,7 @@ a{ color:inherit; }
 .dossier{ padding:64px 0; border-bottom:1px solid var(--border); }
 .dossier-grid{ display:grid; grid-template-columns:1.6fr 1px 1fr; gap:0; }
 .dossier .divider{ background:var(--border); }
-.dossier .copy{ padding-right:48px; }
+.dossier .copy{ padding-right:48px; display:flex; flex-direction:column; }
 .dossier .copy p{ max-width:62ch; font-size:16.5px; }
 .dossier p.section-kicker{ font-family:var(--display); font-weight:600; font-size:20px; color:var(--text); margin:36px 0 20px; max-width:none; }
 .dossier p.section-kicker:first-child{ margin-top:0; }
@@ -168,10 +168,10 @@ a{ color:inherit; }
     linear-gradient(rgba(20,21,15,.78), rgba(20,21,15,.78)),
     url("companies/assets/castle/camo-gold.svg") center / cover no-repeat;
 }
-.co-pill-castle::after{ background:linear-gradient(90deg, #b4993c, #ead973, #d2bb54, #b4993c); }
+.co-pill-castle::after{ background:linear-gradient(90deg, #b4993c, #ead973, #d3b84d, #b4993c); }
 .co-pill-castle .co-pill-mark{ width:12px; height:24px; border-radius:0; }
 .co-pill-castle .co-pill-label{ color:#f1efe6; }
-.co-pill-castle .co-pill-arrow{ color:#d2bb54; }
+.co-pill-castle .co-pill-arrow{ color:#d3b84d; }
 
 /* ---- Vammalan Sanomat widget — a real, separately-run outlet, so it's styled to
    read as an embedded module (its own bordered card, its own nameplate) rather
@@ -208,20 +208,20 @@ a{ color:inherit; }
 .vs-item-title{ font-family:var(--body); font-size:14.5px; }
 .vs-item:hover{ color:var(--text); }
 
-.vs-widget-compact{ max-width:40ch; margin-top:0; }
+.vs-widget-compact{ max-width:44ch; margin-top:0; }
 .dossier p.vs-section-kicker{
-  border-top:1px solid var(--border); margin-top:32px; padding-top:24px; margin-bottom:10px;
+  border-top:1px solid var(--border); margin-top:72px; padding-top:24px; margin-bottom:10px;
 }
-.vs-widget-compact .vs-mast{ padding:14px 22px; }
-.vs-widget-compact .vs-mast-name img{ height:16px; }
-.vs-widget-compact .vs-feature{ padding:16px 22px 14px; }
-.vs-widget-compact .vs-feature-date{ font-size:11px; margin-bottom:6px; }
-.vs-widget-compact .vs-feature-title{ font-size:15px; max-width:none; margin-bottom:8px; }
-.vs-widget-compact .vs-feature-link{ font-size:11.5px; }
-.vs-widget-compact .vs-list{ padding:0 22px 20px; max-height:220px; overflow-y:auto; }
-.vs-widget-compact .vs-item{ padding:8px 2px; gap:4px; flex-direction:column; }
-.vs-widget-compact .vs-item-date{ width:auto; font-size:10.5px; }
-.vs-widget-compact .vs-item-title{ font-size:12.5px; line-height:1.35; }
+.vs-widget-compact .vs-mast{ padding:16px 24px; }
+.vs-widget-compact .vs-mast-name img{ height:18px; }
+.vs-widget-compact .vs-feature{ padding:18px 24px 16px; }
+.vs-widget-compact .vs-feature-date{ font-size:12px; margin-bottom:6px; }
+.vs-widget-compact .vs-feature-title{ font-size:16.5px; max-width:none; margin-bottom:9px; }
+.vs-widget-compact .vs-feature-link{ font-size:12.5px; }
+.vs-widget-compact .vs-list{ padding:0 24px 22px; max-height:250px; overflow-y:auto; }
+.vs-widget-compact .vs-item{ padding:9px 2px; gap:4px; flex-direction:column; }
+.vs-widget-compact .vs-item-date{ width:auto; font-size:11.5px; }
+.vs-widget-compact .vs-item-title{ font-size:13.5px; line-height:1.35; }
 
 @media (max-width:640px){
   .vs-mast{ padding:18px 20px; }
@@ -230,6 +230,16 @@ a{ color:inherit; }
   .vs-item{ flex-direction:column; gap:2px; }
   .vs-item-date{ width:auto; }
 }
+
+/* ---- Instagram embed crop (About page) — hides the widget's own profile
+   header row by shifting the rendered iframe up inside a clipped wrapper. */
+.instagram-media-rendered{ margin-top:-58px !important; }
+
+/* ---- hero video (About page) — native control bar stays hidden until
+   the visitor hovers while it's playing; a custom center play button
+   handles the paused state instead. ---- */
+.hero-video-wrap video::-webkit-media-controls-enclosure{ opacity:0; transition:opacity .2s ease; }
+.hero-video-wrap video:hover::-webkit-media-controls-enclosure{ opacity:1; }
 
 /* ---- teasers wrapper (used on Companies hub) ---- */
 .teasers{ padding:8px 0; }

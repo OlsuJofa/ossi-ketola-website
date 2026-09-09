@@ -20,7 +20,7 @@
     --ground:#14150f;
     --line:#2c2d22;
     --mute:#9b9a86;
-    --ca-gold:#d2bb54;
+    --ca-gold:#d3b84d;
     --ca-text:#f1efe6;
   }
 
@@ -49,20 +49,24 @@
   .ca-back:hover{ color:var(--ca-gold); }
   .ca-title-row{ display:flex; align-items:center; gap:18px; }
   .ca-title-logo{ width:34px; height:68px; flex-shrink:0; }
-  .ca-hero h1{
-    font-family:var(--display); font-weight:600;
-    font-size:clamp(38px,6vw,58px); line-height:1.05; margin:0;
-  }
+  .ca-title-wordmark{ height:clamp(34px,5.5vw,52px); width:auto; }
   .ca-hero .lede{
     max-width:56ch; font-size:18px; color:var(--mute); margin:22px 0 0; line-height:1.65;
   }
 
   .ca-divider{
     height:8px;
-    background:linear-gradient(90deg, #b4993c, #ead973, #d2bb54, #b4993c);
+    background:linear-gradient(90deg, #b4993c, #ead973, #d3b84d, #b4993c);
   }
 
-  .ca-body{ background:var(--ground); padding:64px 0 96px; }
+  .ca-body{
+    background-color:var(--ground);
+    background-image:url("assets/castle/camo-gold-body.svg?v=3");
+    background-position:center top;
+    background-size:900px auto;
+    background-repeat:repeat;
+    padding:64px 0 96px;
+  }
   .ca-panel{
     background:#1b1c14; border:1px solid var(--line);
     padding:40px;
@@ -85,15 +89,22 @@
   .ca-cta-btn{
     display:inline-flex; align-items:center; justify-content:center;
     padding:9px 18px; border-radius:8px;
-    background:linear-gradient(90deg, #b4993c, #ead973, #d2bb54, #b4993c);
+    background:linear-gradient(90deg, #b4993c, #ead973, #d3b84d, #b4993c);
     font-family:var(--body); font-weight:800; font-size:14px; letter-spacing:-0.01em;
     color:#14150f; text-decoration:none; transition:filter .15s ease;
   }
   .ca-cta-btn:hover{ filter:brightness(1.08); }
+  .ca-site-link{
+    display:block; text-align:center; margin-top:12px;
+    font-family:var(--body); letter-spacing:0.02em; font-size:13px;
+    color:var(--ca-gold); text-decoration:none;
+  }
+  .ca-site-link:hover{ color:var(--ca-text); }
   @media (max-width:860px){
     .ca-body-grid{ grid-template-columns:1fr; }
     .ca-side{ position:static; margin-top:2px; }
   }
+  .castle-scope .site-footer{ margin-top:0; }
 
 </style>
 </head>
@@ -129,7 +140,7 @@
     <a class="ca-back" href="index.html">&larr; Back to companies</a>
     <div class="ca-title-row">
       <img src="assets/castle/crest-drawn.svg" alt="" class="ca-title-logo">
-      <h1>The Castle</h1>
+      <img src="assets/castle/wordmark.svg" alt="The Castle" class="ca-title-wordmark">
     </div>
     <p class="lede">Join the resistance!</p>
   </div>
@@ -163,6 +174,7 @@
       <div class="ca-cta-wrap">
         <a class="ca-cta-btn" href="https://jointhecastle.com" target="_blank" rel="noopener noreferrer">Take the first step!</a>
       </div>
+      <a class="ca-site-link" href="https://thecastle.gg" target="_blank" rel="noopener noreferrer">thecastle.gg</a>
     </div>
 
     <div class="ca-side-card">

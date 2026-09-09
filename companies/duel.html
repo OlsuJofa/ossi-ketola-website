@@ -114,16 +114,16 @@
   }
   .agb-badge img{ width:32px; height:auto; }
 
-  /* Duel.com wordmark button — same lockup as Duel's own logo chip (dark ground,
-     bold rounded Inter, no arrow) instead of a plain mono text link. */
+  /* Duel.com wordmark button — same lockup as Duel's own logo chip (dark ground),
+     using the real Duel.com wordmark mark instead of typed-out text. */
   .duel-logo-btn-wrap{ display:flex; justify-content:center; margin:16px 0 0; }
   .duel-logo-btn{
     display:inline-flex; align-items:center; justify-content:center;
-    padding:9px 18px; border-radius:8px;
+    padding:11px 20px; border-radius:8px;
     background:linear-gradient(135deg,#1b1733,#0c0a1a); border:1px solid rgba(139,63,209,.4);
-    font-family:'Inter', sans-serif; font-weight:800; font-size:15px; letter-spacing:-0.01em;
-    color:#f1eefb; text-decoration:none; transition:border-color .15s ease;
+    text-decoration:none; transition:border-color .15s ease;
   }
+  .duel-logo-btn img{ height:16px; width:auto; display:block; }
   .duel-logo-btn:hover{ border-color:rgba(139,63,209,.8); }
 
 </style>
@@ -209,7 +209,9 @@
         <img src="assets/duel/anjouan-seal.svg" alt="Verified — valid licence seal">
       </a></p>
       <div class="duel-logo-btn-wrap">
-        <a class="duel-logo-btn" href="https://duel.com" target="_blank" rel="noopener noreferrer">Duel.com</a>
+        <a class="duel-logo-btn" href="https://duel.com" target="_blank" rel="noopener noreferrer" aria-label="Duel.com">
+          <img src="assets/duel/wordmark.svg" alt="">
+        </a>
       </div>
     </div>
 
