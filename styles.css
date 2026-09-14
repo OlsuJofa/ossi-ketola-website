@@ -99,7 +99,179 @@ a{ color:inherit; }
 }
 
 /* ---- hero ---- */
-.hero{ padding:72px 0 44px; border-bottom:1px solid var(--border); }
+.hero{ position:relative; overflow:hidden; padding:72px 0 0; border-bottom:1px solid var(--border); }
+/* .wrap carries the hero's bottom padding (instead of .hero itself) so that
+   .hero-emblem — an absolutely positioned child of .wrap — can use bottom:0/
+   left:0 to reach exactly the hero's own border and the headline's own left
+   edge; both insets resolve against .wrap's padding box, not .hero's. */
+.hero .wrap{ position:relative; z-index:1; padding-bottom:44px; }
+/* Unpositioned siblings paint below any positioned z-index:0 element regardless
+   of DOM order, so .hero-text needs its own stacking level to render above the
+   emblem — otherwise the castle paints over the headline instead of behind it.
+   A soft halo (layered blurred shadows in the page's own background color)
+   lifts the text off the busy illustration behind it without dimming the
+   castle itself. */
+.hero-text{
+  position:relative; z-index:1;
+  text-shadow:
+    0 0 14px var(--bg), 0 0 14px var(--bg), 0 0 14px var(--bg),
+    0 0 28px var(--bg), 0 0 28px var(--bg);
+}
+/* Full-color architectural illustration — same personal-brand graphic language
+   as The Castle page, shown here at full detail, sitting behind the headline,
+   left-aligned with it. Bottom-anchored to the hero's own border so it stands
+   on the line rather than floating; gatehouse.svg has ~7.4% empty canvas below
+   its own ground line, so translateY (relative to the image's own height,
+   unlike a margin percentage) nudges it down to compensate. */
+.hero-emblem{
+  position:absolute; z-index:0; bottom:0;
+  transform:translateY(7.4%);
+  /* Uses gatehouse-hero.svg: gatehouse.svg with the sloping wall's black left
+     outline removed and a column of stacked bricks laid over the seam with
+     the round tower. The column straddles the seam, so that file's canvas
+     starts 20 units further left (viewBox -20..540, 560 units wide): the box
+     is widened and shifted left by those 20 units so the drawing itself stays
+     exactly where it was. Other pages keep gatehouse.svg. */
+  left:calc(28px - var(--gate-w) * 20 / 540);
+  width:calc(var(--gate-w) * 560 / 540); height:auto;
+  pointer-events:none;
+}
+/* Second building, extending the skyline to the left of the gatehouse. `right`
+   (not `left`) tracks the gatehouse's own left edge (28px from .wrap's edge)
+   regardless of viewport width — a fixed `left` value couldn't track that
+   seam as both images resize. The overlap itself has to come from translateX
+   (a percentage of the tower's OWN width, since transform percentages resolve
+   against the element's own box) rather than shifting the `right` value by a
+   fixed px amount — a fixed px overlap would be a fixed offset in the
+   underlying artwork at large sizes but a much bigger fraction of it at small
+   ones, sliding the seam across both images as the viewport is resized.
+   tower-round.svg's ground line sits almost flush with its own canvas edge
+   already, so it needs only a tiny translateY compensation. */
+.hero-tower{
+  position:absolute; z-index:0; right:calc(100% - 28px); bottom:0;
+  transform:translateX(37.8%) translateY(0.6%);
+  width:var(--tower-w); height:auto;
+  pointer-events:none;
+}
+/* Shared building widths, so the ground/shadow layers below stay locked to
+   the castle art at every viewport width. */
+.hero{ --tower-w:clamp(180px,22vw,280px); --gate-w:clamp(380px,48vw,620px); }
+/* Cast + contact shadow for the round tower. Same 340-unit height as
+   tower-round.svg, but its viewBox runs from x=-260 to 240 (500 units vs the
+   tower's 220) so the shadow can rake back-left past the tower. The shadow's
+   right edge is 20 units right of the tower's, so the tower's own 37.8% shift
+   becomes (0.378*220 + 20) / 500 = 20.63% of this wider box. */
+.hero-tower-shadow{
+  position:absolute; z-index:0; right:calc(100% - 28px); bottom:0;
+  transform:translateX(20.63%) translateY(0.6%);
+  width:calc(var(--tower-w) * 500 / 220); height:auto;
+  pointer-events:none;
+}
+/* Ground strip the castle stands on. Without it, the round tower's curved
+   base only touches the border at its lowest point and its ends float; the
+   strip rises past the skirt's ends (24/220 of the tower's width) so the
+   whole base sits on a surface. Runs from well left of the tower to just past
+   the gatehouse's own ground line (452/540 of its width), fading at both ends. */
+.hero-ground{
+  position:absolute; z-index:0; bottom:0;
+  left:calc(28px - var(--tower-w) * 1.8);
+  width:calc(var(--tower-w) * 1.8 + var(--gate-w) * 0.87);
+  height:calc(var(--tower-w) * 0.14);
+  background:
+    url("assets/graphics/ground-hatch.svg") left bottom / auto 100% repeat-x,
+    linear-gradient(to top, rgba(43,39,36,.06), rgba(43,39,36,0));
+  -webkit-mask-image:linear-gradient(to right, transparent, #000 18%, #000 88%, transparent);
+  mask-image:linear-gradient(to right, transparent, #000 18%, #000 88%, transparent);
+  pointer-events:none;
+}
+/* Turret on the right, mirroring the round tower: its base centre sits the
+   same 0.122 x tower-width outside the content edge, so it's whole on wide
+   screens and bleeds off the hero's right edge in narrower windows. 0.9x the
+   tower's width makes it ~10% taller (the drawing is 248x470 vs 220x340).
+   Left shift = (0.9*0.3774 - 0.122) / 0.9 = 24.19% of its own width (base
+   centre is at x=104/248). The skirt's lowest point is 8.3 units above the
+   canvas bottom, hence translateY(1.77%). */
+.hero{ --turret-w:calc(var(--tower-w) * 0.9); }
+.hero-turret{
+  position:absolute; z-index:0; left:calc(100% - 28px); bottom:0;
+  transform:translateX(-24.19%) translateY(1.77%);
+  width:var(--turret-w); height:auto;
+  pointer-events:none;
+}
+/* Its shadow file runs from x=-340 to 248 (588 units vs the turret's 248), so
+   the same anchor becomes (0.2419*248 + 340) / 588 = 68.03%. */
+.hero-turret-shadow{
+  position:absolute; z-index:0; left:calc(100% - 28px); bottom:0;
+  transform:translateX(-68.03%) translateY(1.77%);
+  width:calc(var(--turret-w) * 588 / 248); height:auto;
+  pointer-events:none;
+}
+/* Same ground strip, repositioned under the turret and its cast shadow. */
+.hero-ground-right{
+  left:calc(100% - 28px - var(--tower-w) * 1.75);
+  width:calc(var(--tower-w) * 2.75);
+}
+/* On narrow screens the turret would sit behind the headline and lede. */
+@media (max-width:760px){
+  .hero-turret, .hero-turret-shadow, .hero-ground-right, .hero-flag{ display:none; }
+}
+/* Flagpole in the gap between the gatehouse and the turret. Inline SVG drawn
+   in gatehouse.svg's own units (--u), so the pole top (204u) matches the
+   gatehouse's tallest tower at every width. The flag flies LEFT of the pole:
+   canvas x runs -270..15 with the pole at x=0, so left = pole position - 270u.
+   The flag's centre (58u left of the pole) aims for the middle of the gap
+   (gatehouse ground ends at 28px + 452u; the turret's body starts at
+   100% - 28px - 0.0725 x tower-w), clamped so the flag's tips (118u left of
+   the pole) stay 24px clear of the lede's widest possible line (56ch at the
+   lede's 19px) and the pole and rings (3u) stay 14px clear of the turret.
+   z-index 2 lifts it above the lede's soft panel, which would otherwise wash
+   it out; it never overlaps the text. */
+.hero-flag{
+  --u:calc(var(--gate-w) / 540);
+  position:absolute; z-index:2; bottom:0;
+  font:19px var(--body);
+  left:calc(clamp(
+    calc(52px + 56ch + 118 * var(--u)),
+    calc(50% + 284 * var(--u) - var(--tower-w) * 0.03625),
+    calc(100% - 42px - var(--tower-w) * 0.0725 - 3 * var(--u))
+  ) - 270 * var(--u));
+  width:calc(285 * var(--u)); height:auto;
+  overflow:visible; pointer-events:none;
+}
+/* Below ~842px the text-clearance floor pushes the flag into the turret
+   (measured: 21px clear at 850, -23px at 800), so it bows out here. */
+@media (max-width:860px){
+  .hero-flag{ display:none; }
+}
+/* Each vertical strip of cloth bobs on the same loop, each one a step later
+   than the strip before it, so the ripple travels from pole to tips.
+   Amplitude (--amp) grows toward the free end; the shade follows a quarter
+   cycle behind to darken the folds. 42 thin strips keep the step between
+   neighbours under a pixel so the cloth reads as one smooth curve. Timing
+   must match make_flag.py (2.6s period, 1.96s spread / 42 strips). */
+.crown-flag .flag-strip{
+  animation:flag-wave 2.6s ease-in-out infinite;
+  animation-delay:calc(var(--i) * 0.04667s - 2.6s);
+}
+.crown-flag .flag-shade{
+  opacity:0;
+  animation:flag-shade 2.6s ease-in-out infinite;
+  animation-delay:calc(var(--i) * 0.04667s - 3.25s);
+}
+@keyframes flag-wave{
+  0%,100%{ transform:translateY(calc(var(--amp) * -1px)); }
+  50%{ transform:translateY(calc(var(--amp) * 1px)); }
+}
+@keyframes flag-shade{
+  0%,100%{ opacity:0; }
+  50%{ opacity:calc(var(--k) * 0.12); }
+}
+/* Reduced motion: no animation at all (the global rule below only shortens
+   durations, which would make an infinite loop flicker); each strip keeps
+   its inline mid-wave offset, so the flag still reads as cloth. */
+@media (prefers-reduced-motion:reduce){
+  .crown-flag .flag-strip, .crown-flag .flag-shade{ animation:none !important; }
+}
 .hero .kicker{
   font-family:var(--body); letter-spacing:0.02em; font-size:13px; color:var(--gold-bright);
   margin:0 0 18px;
@@ -111,12 +283,38 @@ a{ color:inherit; }
 }
 .hero h1 em{ font-style:italic; font-weight:300; color:var(--muted); }
 .hero .lede{
+  position:relative;
   max-width:56ch; font-size:19px; color:var(--muted);
   margin:22px 0 0; line-height:1.65;
+  padding:16px 20px; margin-left:-20px;
+}
+/* box-shadow was the wrong tool: it's additive glow, so it brightens/washes
+   out the art behind it everywhere it reaches, however faintly, rather than
+   ever getting back to genuinely unmodified — reading as a lit-up patch
+   ("flashlight") instead of a fade. mask-image is a true alpha mask: outside
+   its reach the panel is fully invisible (castle shows completely
+   untouched), and opacity ramps to zero inside it, with nothing added
+   outside that ramp.
+   The ellipse is sized `closest-side`, so 100% lands exactly on the box's
+   edges. (The default, farthest-corner, puts the box's side edges at only
+   ~71% of the radius, so any fade stop past that gets cut off mid-ramp —
+   which left a visible straight edge left/right and top/bottom.) The box is
+   inset far enough that the opaque core (~44% of the radius) covers about the
+   same area as before, and the ramp is eased through several stops instead of
+   one linear run, so there's no visible line where the fade starts or ends. */
+.hero .lede::before{
+  content:""; position:absolute; z-index:-1; inset:-60px -120px;
+  background:rgba(250,249,247,0.88);
+  --lede-fade:radial-gradient(closest-side, #000 44%, rgba(0,0,0,.93) 52%,
+    rgba(0,0,0,.78) 60%, rgba(0,0,0,.58) 68%, rgba(0,0,0,.38) 76%,
+    rgba(0,0,0,.2) 84%, rgba(0,0,0,.07) 92%, transparent 100%);
+  -webkit-mask-image:var(--lede-fade);
+  mask-image:var(--lede-fade);
+  pointer-events:none;
 }
 
 /* ---- about / dossier layout ---- */
-.dossier{ padding:64px 0; border-bottom:1px solid var(--border); }
+.dossier{ padding:64px 0; }
 .dossier-grid{ display:grid; grid-template-columns:1.6fr 1px 1fr; gap:0; }
 .dossier .divider{ background:var(--border); }
 .dossier .copy{ padding-right:48px; display:flex; flex-direction:column; }
@@ -148,14 +346,13 @@ a{ color:inherit; }
 /* backgrounds mirror the same real brand graphics used on the Companies hub banners */
 .co-pill-duel{
   background:
-    radial-gradient(ellipse 90% 160% at 15% 20%, rgba(139,63,209,0.55), transparent 60%),
-    radial-gradient(ellipse 80% 140% at 90% 90%, rgba(47,174,134,0.45), transparent 60%),
-    linear-gradient(180deg, #131028, #0c0a1a);
+    radial-gradient(ellipse 90% 160% at 15% 20%, rgba(67,91,240,0.4), transparent 62%),
+    linear-gradient(180deg, #121731, #0a0d20);
 }
-.co-pill-duel::after{ background:linear-gradient(90deg, #5865f2 0%, #8b3fd1 45%, #2fae86 100%); }
+.co-pill-duel::after{ background:linear-gradient(90deg, #0a0d20 0%, #435bf0 100%); }
 .co-pill-duel .co-pill-mark{ width:15px; height:17px; border-radius:0; }
-.co-pill-duel .co-pill-label{ color:#f1eefb; }
-.co-pill-duel .co-pill-arrow{ color:#c9b3ea; }
+.co-pill-duel .co-pill-label{ color:#eef1fb; }
+.co-pill-duel .co-pill-arrow{ color:#7086f7; }
 
 .co-pill-cs{ background:#363332; }
 .co-pill-cs::after{ background:repeating-linear-gradient(-45deg, #e9b10e 0 6px, #2b2926 6px 12px); }
@@ -256,7 +453,7 @@ a{ color:inherit; }
 
 /* ---- social row list (2x2 grid of square tiles —
    own monochrome palette, not the reference's dark color scheme) ---- */
-.social-list{ display:grid; grid-template-columns:repeat(2,1fr); gap:20px; max-width:520px; margin:0 auto; }
+.social-list{ display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
 .social-row{
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px;
   aspect-ratio:1/1;
@@ -358,10 +555,77 @@ a{ color:inherit; }
 }
 .back-link:hover{ color:var(--gold-bright); }
 
-section.page-head{ padding:56px 0 32px; border-bottom:1px solid var(--border); }
+section.page-head{ padding:56px 0 0; border-bottom:1px solid var(--border); }
+section.page-head .wrap{ display:flex; align-items:flex-end; justify-content:space-between; gap:40px; }
+.page-head-text{ flex:1; min-width:0; padding-bottom:32px; }
+@media (max-width:700px){
+  .page-head-text{ padding-bottom:24px; }
+}
 section.page-head .kicker{ font-family:var(--body); letter-spacing:0.02em; font-size:13px; color:var(--gold-bright); margin:0 0 14px; }
 section.page-head h1{ font-family:var(--display); font-weight:600; font-size:clamp(38px,6vw,56px); margin:0; text-wrap:balance; }
 section.page-head .lede{ max-width:60ch; color:var(--muted); font-size:17px; margin-top:16px; }
+
+/* ---- page headers with a castle skyline (.has-scene: Blog, Companies, Press,
+   Social; scenes generated by templates/castle-art/castle-scenes.py) ---- */
+/* Tall enough for the whole skyline (scene height = its width / 5, plus a
+   little headroom for the flag) even when the title and lede are short. */
+section.page-head.has-scene{
+  position:relative; overflow:hidden;
+  min-height:calc(clamp(1000px, 104vw, 1600px) / 5 + 16px);
+}
+section.page-head.has-scene .wrap{ position:relative; z-index:1; }
+/* Title block sized to its words (not the whole row), with the same text halo
+   and soft background panel recipe as the home hero, so buildings can stand
+   behind the headline and it stays readable. */
+.has-scene .page-head-text{
+  position:relative; z-index:1; flex:0 1 auto; max-width:640px; padding-bottom:72px;
+  text-shadow:0 0 12px var(--bg), 0 0 12px var(--bg), 0 0 24px var(--bg);
+}
+.has-scene .page-head-text::before{
+  content:""; position:absolute; z-index:-1; inset:-40px -90px 40px -90px;
+  /* Lighter than the home hero's panel: enough to keep the words readable,
+     while buildings behind the headline still read as buildings. A soft-edged
+     rectangle (two feathered linear masks intersected) rather than an oval, so
+     the corners of the text block (e.g. the lede's last line) are covered as
+     fully as its middle. */
+  background:rgba(250,249,247,.72);
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, #000 90px, #000 calc(100% - 90px), transparent),
+    linear-gradient(to bottom, transparent, #000 40px, #000 calc(100% - 30px), transparent);
+  -webkit-mask-composite:source-in;
+  mask-image:
+    linear-gradient(to right, transparent, #000 90px, #000 calc(100% - 90px), transparent),
+    linear-gradient(to bottom, transparent, #000 40px, #000 calc(100% - 30px), transparent);
+  mask-composite:intersect;
+  pointer-events:none;
+}
+/* Skyline canvas is 1600x320 units, drawn at 1 unit = 1px on wide screens and
+   centred on the viewport, standing on the header's bottom border. Below
+   1000px wide it stops shrinking and crops at the sides instead, so buildings
+   never get tiny. The crown flag is positioned in % of this box. */
+.page-scene{
+  --scene-core:clamp(1000px, 104vw, 1600px);
+  position:absolute; z-index:0; left:0; bottom:0;
+  width:100%; height:calc(var(--scene-core) / 5);
+  overflow:hidden; pointer-events:none;
+}
+/* The 1600-unit core (where the buildings, flag and drawbridge live) stays
+   centred; the SVG canvas itself runs 1000 units further out on each side
+   with plain wall (3600 units = 225% of the core), so every page's wall
+   reaches the screen edge and joins the next page's wall during a slide. */
+.page-scene-core{
+  position:absolute; left:50%; bottom:0;
+  width:var(--scene-core); aspect-ratio:1600 / 320;
+  transform:translateX(-50%);
+}
+.page-scene-core > img{
+  position:absolute; bottom:0; left:-62.5%;
+  width:225%; max-width:none; height:auto;
+}
+.page-scene .crown-flag{ position:absolute; height:auto; overflow:visible; }
+@media (max-width:700px){
+  .has-scene .page-head-text{ padding-bottom:56px; }
+}
 
 @media (max-width:600px){
   body{ padding-top:118px; }
@@ -383,4 +647,127 @@ section.page-head .lede{ max-width:60ch; color:var(--muted); font-size:17px; mar
 @media (prefers-reduced-motion:reduce){
   html{ scroll-behavior:auto; }
   *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+}
+
+/* ---- page slides between the five main pages (opt-in tags in each page's
+   <head>, direction chosen by slides.js from the menu order) ---- */
+/* The menu bar gets its own layer so it stays put while the content slides. */
+.site-header{ view-transition-name:site-header; }
+::view-transition-group(site-header){ animation-duration:.45s; }
+
+/* On desktop the castle skyline (Blog/Companies/Social/Press) is its own layer:
+   it slides exactly one screen width, so the old page's wall hands straight
+   over to the new page's wall like one long compound, and the group glides
+   up/down if the two headers' ground lines differ. It runs on its own clock,
+   a little slower than the text (0.7s vs 0.45s) with a long ease-out, so it
+   trails behind and settles softly. The title block is a separate layer at
+   the text's speed, so it isn't carried along by the castle and stays in
+   front of the buildings mid-slide (named layers otherwise paint above the
+   rest of the page). Below 1000px the screen edges land on buildings instead
+   of the shared edge wall, so phones and small tablets keep the plain slide. */
+@media (min-width:1000px){
+  .has-scene .page-scene{ view-transition-name:castle; }
+  .has-scene .page-head-text{ view-transition-name:ph-text; }
+}
+/* Title blocks differ in size between pages; don't stretch them to each other. */
+::view-transition-group(ph-text){ animation:none; }
+::view-transition-old(ph-text),
+::view-transition-new(ph-text){ inline-size:auto; block-size:auto; }
+
+/* Text and page body: 0.45s. fill-mode both keeps each snapshot at its end
+   position until the whole transition (the slower castle, 0.7s) is over;
+   ph-text's group has animation:none, which also resets the fill mode its
+   old/new images inherit, so without this the old title snaps back into view
+   for the last quarter-second. */
+::view-transition-old(root), ::view-transition-new(root),
+::view-transition-old(ph-text), ::view-transition-new(ph-text),
+::view-transition-old(castle), ::view-transition-new(castle){
+  animation-fill-mode:both;
+}
+::view-transition-old(root), ::view-transition-new(root),
+::view-transition-old(ph-text), ::view-transition-new(ph-text){
+  animation-duration:.45s;
+  animation-timing-function:cubic-bezier(.65,0,.35,1);
+  mix-blend-mode:normal;
+}
+/* Castle: 0.7s, starts moving at once and glides to a long, gentle stop. The
+   height glide (group) uses the same clock so the wall stays joined. */
+::view-transition-group(castle),
+::view-transition-old(castle), ::view-transition-new(castle){
+  animation-duration:.7s;
+  animation-timing-function:cubic-bezier(.22,1,.36,1);
+}
+::view-transition-old(castle), ::view-transition-new(castle){ mix-blend-mode:normal; }
+html:active-view-transition-type(slide-forward)::view-transition-old(root),
+html:active-view-transition-type(slide-forward)::view-transition-old(castle){ animation-name:page-out-left; }
+html:active-view-transition-type(slide-forward)::view-transition-new(root),
+html:active-view-transition-type(slide-forward)::view-transition-new(castle){ animation-name:page-in-right; }
+html:active-view-transition-type(slide-back)::view-transition-old(root),
+html:active-view-transition-type(slide-back)::view-transition-old(castle){ animation-name:page-out-right; }
+html:active-view-transition-type(slide-back)::view-transition-new(root),
+html:active-view-transition-type(slide-back)::view-transition-new(castle){ animation-name:page-in-left; }
+/* The title layer is only as wide as the title block (~450-600px), and a %
+   translate is relative to that, so it has to travel a full screen width in
+   vw instead; otherwise the old and new titles overlap mid-slide. */
+html:active-view-transition-type(slide-forward)::view-transition-old(ph-text){ animation-name:text-out-left; }
+html:active-view-transition-type(slide-forward)::view-transition-new(ph-text){ animation-name:text-in-right; }
+html:active-view-transition-type(slide-back)::view-transition-old(ph-text){ animation-name:text-out-right; }
+html:active-view-transition-type(slide-back)::view-transition-new(ph-text){ animation-name:text-in-left; }
+@keyframes page-out-left{ to{ transform:translateX(-100%); } }
+@keyframes page-in-right{ from{ transform:translateX(100%); } }
+@keyframes page-out-right{ to{ transform:translateX(100%); } }
+@keyframes page-in-left{ from{ transform:translateX(-100%); } }
+@keyframes text-out-left{ to{ transform:translateX(-100vw); } }
+@keyframes text-in-right{ from{ transform:translateX(100vw); } }
+@keyframes text-out-right{ to{ transform:translateX(100vw); } }
+@keyframes text-in-left{ from{ transform:translateX(-100vw); } }
+/* ---- company pages: rise up to open, drop away to close (types set by slides.js) ---- */
+/* The page underneath keeps its castle and title as part of itself, so they
+   stay still and dim with it instead of floating above the moving sheet
+   (named layers always paint on top of the page). */
+html:active-view-transition-type(sheet-open) .page-scene,
+html:active-view-transition-type(sheet-open) .page-head-text,
+html:active-view-transition-type(sheet-close) .page-scene,
+html:active-view-transition-type(sheet-close) .page-head-text{ view-transition-name:none; }
+/* Opening: the company page rises from the bottom and glides to a soft stop,
+   while the page it covers stays put and dims a little. */
+html:active-view-transition-type(sheet-open)::view-transition-new(root){
+  animation:sheet-rise .55s cubic-bezier(.22,1,.36,1) both;
+  box-shadow:0 -14px 40px rgba(20,18,15,.18);
+}
+html:active-view-transition-type(sheet-open)::view-transition-old(root){
+  animation:sheet-dim .55s cubic-bezier(.22,1,.36,1) both;
+}
+/* Closing: the company page is let go and falls away, slow at first then
+   faster (ease-in), over the page underneath as it brightens again. */
+html:active-view-transition-type(sheet-close)::view-transition-old(root){
+  z-index:1;
+  animation:sheet-drop .5s cubic-bezier(.5,0,.9,.5) both;
+  box-shadow:0 -14px 40px rgba(20,18,15,.18);
+}
+html:active-view-transition-type(sheet-close)::view-transition-new(root){
+  animation:sheet-undim .5s cubic-bezier(.5,0,.9,.5) both;
+}
+@keyframes sheet-rise{ from{ transform:translateY(100%); } }
+@keyframes sheet-drop{ to{ transform:translateY(100%); } }
+@keyframes sheet-dim{ to{ filter:brightness(.82); } }
+@keyframes sheet-undim{ from{ filter:brightness(.82); } }
+/* Company page -> another company page: the new one rises exactly like
+   opening, while the old one is tucked away underneath (sinks back slightly
+   and darkens). slides.js replaces it in history, so it's really gone. */
+html:active-view-transition-type(sheet-swap)::view-transition-new(root){
+  animation:sheet-rise .55s cubic-bezier(.22,1,.36,1) both;
+  box-shadow:0 -14px 40px rgba(20,18,15,.18);
+}
+html:active-view-transition-type(sheet-swap)::view-transition-old(root){
+  transform-origin:50% 40%;
+  animation:sheet-tuck .55s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes sheet-tuck{ to{ transform:scale(.94); filter:brightness(.78); } }
+/* Reduced motion: the page just changes, no slide. (The global reduced-motion
+   rule's * selector doesn't reach these pseudo-elements.) */
+@media (prefers-reduced-motion:reduce){
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*){ animation:none !important; }
 }

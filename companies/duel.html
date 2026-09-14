@@ -19,27 +19,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;800&amp;family=Karla:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../styles.css">
 <style>
-  /* Page-scoped palette pulled from Duel.com's own brand colors — indigo/violet/teal,
-     kept local to this page only. Rest of the site stays on the gold/oxblood system. */
+  /* Page-scoped palette built on Duel's deep-navy ground (Ebony, #121731) with a single
+     royal-blue accent — kept local to this page only. Rest of the site stays on the
+     gold/oxblood system. */
   .duel-scope{
-    background:#0c0a1a;
-    --duel-bg:#0c0a1a;
-    --duel-bg-2:#131028;
-    --duel-surface:#181432;
-    --duel-border:#2a2450;
-    --duel-text:#f1eefb;
-    --duel-muted:#9d96c4;
-    --duel-blue:#5865f2;
-    --duel-blue-bright:#7b85f7;
-    --duel-purple:#8b3fd1;
-    --duel-teal:#2fae86;
-    --duel-teal-bright:#4fd6a8;
+    background:#121731;
+    --duel-bg:#121731;
+    --duel-bg-2:#0a0d20;
+    --duel-surface:#1a2147;
+    --duel-border:#2c3768;
+    --duel-text:#eef1fb;
+    --duel-muted:#95a0c9;
+    --duel-blue:#435bf0;
+    --duel-blue-bright:#7086f7;
   }
 
   .duel-hero{
     background:
-      radial-gradient(ellipse 60% 90% at 12% 30%, rgba(139,63,209,0.35), transparent 60%),
-      radial-gradient(ellipse 55% 80% at 88% 70%, rgba(47,174,134,0.28), transparent 60%),
+      radial-gradient(ellipse 70% 90% at 14% 20%, rgba(67,91,240,0.24), transparent 62%),
       linear-gradient(180deg, var(--duel-bg-2), var(--duel-bg));
     border-bottom:1px solid var(--duel-border);
     padding:64px 0 0;
@@ -56,7 +53,7 @@
   }
   .duel-hero-bar{
     margin-top:44px; height:64px;
-    background:linear-gradient(90deg, var(--duel-blue) 0%, var(--duel-purple) 45%, var(--duel-teal) 100%);
+    background:linear-gradient(90deg, var(--duel-bg-2) 0%, var(--duel-blue) 100%);
     opacity:0.9;
   }
 
@@ -71,11 +68,16 @@
   }
   .duel-panel .kicker{ font-family:var(--body); letter-spacing:0.02em; font-size:12.5px; color:var(--duel-blue-bright); }
   .duel-panel p{ color:var(--duel-muted); font-size:15px; margin:0; max-width:60ch; }
+  /* Back button: same shape as CSGOEmpire's, in Duel's own colours (card
+     surface/border, rounded like the Duel cards, blue on hover). */
   .duel-back{
-    display:inline-block; margin-bottom:24px; font-family:var(--body); letter-spacing:0.02em; font-size:13px;
-    color:var(--duel-muted); text-decoration:none;
+    display:inline-flex; align-items:center;
+    margin-bottom:24px; padding:9px 16px; border-radius:10px;
+    background:var(--duel-surface); border:1px solid var(--duel-border);
+    font-family:var(--body); font-weight:600; letter-spacing:0.01em; font-size:13px;
+    color:var(--duel-muted); text-decoration:none; transition:border-color .15s ease, color .15s ease;
   }
-  .duel-back:hover{ color:var(--duel-teal-bright); }
+  .duel-back:hover{ color:var(--duel-blue-bright); border-color:rgba(112,134,247,.55); }
 
   .duel-body-grid{ display:grid; grid-template-columns:1fr 280px; gap:2px 40px; align-items:start; }
   .duel-main{ display:flex; flex-direction:column; }
@@ -88,16 +90,16 @@
   .duel-side-line{ font-size:14px; margin:16px 0 0; line-height:1.4; color:var(--duel-muted); }
   .duel-side-line strong{
     display:block; font-size:11px; text-transform:uppercase; letter-spacing:.04em;
-    color:#7a75a3; font-weight:600; margin-bottom:2px;
+    color:#7580ab; font-weight:600; margin-bottom:2px;
   }
   .duel-side-fair-text{
     font-size:13.5px; line-height:1.55; color:var(--duel-muted); margin:14px 0 0;
   }
   .duel-side-link{
     display:inline-block; margin-top:20px; font-family:var(--body); letter-spacing:0.02em; font-size:16px;
-    color:var(--duel-teal-bright); text-decoration:none; font-weight:600;
+    color:var(--duel-blue-bright); text-decoration:none; font-weight:600;
   }
-  .duel-side-link:hover{ color:var(--duel-blue-bright); }
+  .duel-side-link:hover{ color:var(--duel-text); }
   .duel-side-notice{
     font-family:var(--body); letter-spacing:0.02em; font-size:12px; color:var(--duel-muted); margin:0;
     padding:16px 20px; border:1px solid var(--duel-border); border-radius:10px;
@@ -120,13 +122,16 @@
   .duel-logo-btn{
     display:inline-flex; align-items:center; justify-content:center;
     padding:11px 20px; border-radius:8px;
-    background:linear-gradient(135deg,#1b1733,#0c0a1a); border:1px solid rgba(139,63,209,.4);
+    background:linear-gradient(135deg,#1a2147,#0a0d20); border:1px solid rgba(67,91,240,.4);
     text-decoration:none; transition:border-color .15s ease;
   }
   .duel-logo-btn img{ height:16px; width:auto; display:block; }
-  .duel-logo-btn:hover{ border-color:rgba(139,63,209,.8); }
+  .duel-logo-btn:hover{ border-color:rgba(112,134,247,.8); }
 
 </style>
+<!-- page transitions: company pages rise in / drop away (see slides.js) -->
+<style>@view-transition{navigation:auto}</style>
+<script src="../slides.js"></script>
 </head>
 <body class="duel-scope">
 
@@ -157,7 +162,7 @@
 
 <section class="duel-hero">
   <div class="wrap">
-    <a class="duel-back" href="index.html">&larr; Back to companies</a>
+    <a class="duel-back" href="index.html" data-back>Back</a>
     <div class="duel-title-row">
       <img src="assets/duel/logo.svg" alt="" class="duel-title-logo">
       <h1>Duel.com</h1>

@@ -40,7 +40,7 @@
     color:var(--white);
   }
   .cs-back{
-    display:inline-flex; align-items:center; gap:7px;
+    display:inline-flex; align-items:center;
     margin-bottom:28px; padding:9px 16px; border-radius:6px;
     background:#242220; border:1px solid var(--line);
     font-family:var(--body); font-weight:600; letter-spacing:0.01em; font-size:13px;
@@ -129,6 +129,9 @@
   .cs-logo-btn:hover{ border-color:rgba(233,177,14,.8); }
 
 </style>
+<!-- page transitions: company pages rise in / drop away (see slides.js) -->
+<style>@view-transition{navigation:auto}</style>
+<script src="../slides.js"></script>
 </head>
 <body class="cs-scope">
 
@@ -159,7 +162,7 @@
 
 <section class="cs-hero">
   <div class="wrap">
-    <a class="cs-back" href="index.html">&larr; Go back</a>
+    <a class="cs-back" href="index.html" data-back>Back</a>
     <div class="cs-title-row">
       <img src="assets/csgoempire/wordmark.svg" alt="CSGOEmpire" class="cs-title-wordmark">
     </div>
