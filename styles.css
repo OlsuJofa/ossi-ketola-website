@@ -325,6 +325,12 @@ a{ color:inherit; }
 .dossier .copy .byline{ font-family:var(--display); font-style:italic; font-size:16px; color:var(--muted); margin-top:24px; }
 .dossier .facts{ padding-left:48px; display:flex; flex-direction:column; gap:0; }
 .dossier .facts .side-copy{ font-size:15px; line-height:1.65; color:var(--text); max-width:40ch; }
+/* Small title sitting on the video's top-left edge: a clear gap below the
+   section heading, then tight to the video so it labels the video. */
+.dossier .facts .video-title{
+  font-family:var(--display); font-weight:600; font-size:15px; color:var(--text);
+  margin:14px 0 8px; max-width:540px;
+}
 
 /* pill links to each company page — brand-accurate colors/marks, shape borrowed
    from a rounded chip/pill pattern rather than the site's usual square teaser rows */
@@ -419,6 +425,22 @@ a{ color:inherit; }
 .vs-widget-compact .vs-item{ padding:9px 2px; gap:4px; flex-direction:column; }
 .vs-widget-compact .vs-item-date{ width:auto; font-size:11.5px; }
 .vs-widget-compact .vs-item-title{ font-size:13.5px; line-height:1.35; }
+/* Bottom row: the outlet's own social accounts, as one-colour icons in the
+   widget's muted ink (darkening on hover like the article links). */
+.vs-social{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:14px 24px 16px; border-top:1px solid var(--border);
+}
+.vs-social-label{ font-family:var(--body); letter-spacing:0.02em; font-size:12px; color:var(--muted); }
+.vs-social-links{ display:flex; gap:8px; }
+.vs-social-link{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:34px; height:34px; border:1px solid var(--border); border-radius:50%;
+  color:var(--muted); background:var(--bg);
+  transition:color .15s ease, border-color .15s ease;
+}
+.vs-social-link:hover, .vs-social-link:focus-visible{ color:var(--text); border-color:var(--text); }
+.vs-social-link svg{ display:block; }
 
 @media (max-width:640px){
   .vs-mast{ padding:18px 20px; }
@@ -525,6 +547,7 @@ a{ color:inherit; }
 .lightbox-download:hover{ color:var(--gold-bright); }
 
 .contact-card{
+  position:relative;
   margin-top:56px; background:var(--surface); border:1px solid var(--border);
   padding:32px; text-align:center;
 }
@@ -533,6 +556,17 @@ a{ color:inherit; }
 .contact-card .line{ font-family:var(--body); letter-spacing:0.02em; font-size:14.5px; }
 .contact-card .line a{ color:inherit; text-decoration:none; }
 .contact-card .line a:hover{ text-decoration:underline; }
+/* The note sits in the card's existing bottom padding instead of adding a line,
+   so the card keeps the exact size it had without it. */
+.contact-card .contact-note{
+  position:absolute; left:32px; right:32px; bottom:7px; margin:0;
+  color:var(--muted); font-size:12px; line-height:1.5; letter-spacing:0.02em;
+}
+/* Phones: use more of the card's width and slightly smaller text so the note
+   stays on one line inside the bottom padding instead of overlapping the phone. */
+@media (max-width:600px){
+  .contact-card .contact-note{ left:8px; right:8px; font-size:11px; letter-spacing:0; }
+}
 
 /* ---- article ---- */
 .article{ max-width:680px; margin:0 auto; padding:64px 28px 96px; }
