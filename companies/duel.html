@@ -67,6 +67,8 @@
     font-family:var(--body); font-weight:700; font-size:16px; color:var(--duel-text); margin:4px 0 0;
   }
   .duel-panel .kicker{ font-family:var(--body); letter-spacing:0.02em; font-size:12.5px; color:var(--duel-blue-bright); }
+  /* Duel Originals hand-lettered logo used as that panel's headline. */
+  .duel-originals-logo{ display:block; height:18px; width:auto; max-width:100%; margin:0 0 10px; }
   .duel-panel p{ color:var(--duel-muted); font-size:15px; margin:0; max-width:60ch; }
   /* Back button: same shape as CSGOEmpire's, in Duel's own colours (card
      surface/border, rounded like the Duel cards, blue on hover). */
@@ -132,6 +134,7 @@
 <!-- page transitions: company pages rise in / drop away (see slides.js) -->
 <style>@view-transition{navigation:auto}</style>
 <script src="../slides.js"></script>
+<script src="../to-top.js" defer></script>
 </head>
 <body class="duel-scope">
 
@@ -183,7 +186,7 @@
     </div>
 
     <div class="duel-panel">
-      <span class="kicker">Duel Originals</span>
+      <img class="duel-originals-logo" src="assets/duel/duel-originals.png" width="692" height="120" alt="Duel Originals">
       <p>Duel Originals are Duel's own in-house games &mdash; not licensed from outside studios &mdash; covering formats like Dice, Crash, Plinko, Mines, and Blackjack. Each round is provably fair: the result is generated from a seed/hash pair players can independently verify after the bet settles, so outcomes can't be quietly altered.</p>
       <p style="color:var(--duel-blue-bright); font-size:13.5px;">Every Duel Originals game runs at 100% RTP &mdash; the game-by-game version of the zero-edge stance covered in the panel below.</p>
     </div>

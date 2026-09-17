@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.ossiketola.com/sitemap.xml
+Sitemap: https://olsujofa.github.io/ossi-ketola-website/sitemap.xml

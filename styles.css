@@ -683,6 +683,33 @@ section.page-head.has-scene .wrap{ position:relative; z-index:1; }
   *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
 }
 
+/* ---- back-to-top button (created by to-top.js): phones only, fades in after
+   scrolling about a screen down. Light on the white pages; each company page
+   restyles it in its own palette below. ---- */
+.to-top{ display:none; }
+@media (max-width:760px){
+  .to-top{
+    display:flex; align-items:center; justify-content:center;
+    position:fixed; z-index:15;
+    right:16px; bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+    width:44px; height:44px; padding:0; border-radius:50%;
+    background:var(--bg); color:var(--text); border:1px solid var(--border);
+    box-shadow:0 4px 14px rgba(20,18,15,.16);
+    cursor:pointer; -webkit-tap-highlight-color:transparent;
+    opacity:0; visibility:hidden; transform:translateY(10px);
+    transition:opacity .2s ease, transform .2s ease, visibility .2s, border-color .15s ease;
+  }
+  .to-top.is-visible{ opacity:1; visibility:visible; transform:none; }
+  .to-top:active{ transform:scale(.94); }
+  .to-top svg{ display:block; }
+  .duel-scope .to-top{ background:#1a2147; color:#eef1fb; border-color:#2c3768; box-shadow:0 4px 14px rgba(0,0,0,.4); }
+  .duel-scope .to-top:focus-visible{ border-color:#7086f7; }
+  .cs-scope .to-top{ background:#242220; color:#ffffff; border-color:#4a4643; box-shadow:0 4px 14px rgba(0,0,0,.4); }
+  .cs-scope .to-top:focus-visible{ border-color:#01bf4d; }
+  .castle-scope .to-top{ background:#1b1c14; color:#d3b84d; border-color:#2c2d22; box-shadow:0 4px 14px rgba(0,0,0,.45); }
+  .castle-scope .to-top:focus-visible{ border-color:#d3b84d; }
+}
+
 /* ---- page slides between the five main pages (opt-in tags in each page's
    <head>, direction chosen by slides.js from the menu order) ---- */
 /* The menu bar gets its own layer so it stays put while the content slides. */
