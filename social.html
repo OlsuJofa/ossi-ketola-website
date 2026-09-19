@@ -68,6 +68,7 @@
 <section class="dossier">
   <div class="wrap dossier-grid">
     <div class="copy">
+      <p class="section-kicker">Socials:</p>
       <div class="social-list">
         <a class="social-row" href="https://www.instagram.com/ossi/" target="_blank" rel="noopener">
           <span class="social-row-icon"><img src="assets/social/instagram.svg" alt=""></span>
@@ -90,23 +91,61 @@
     <div class="divider"></div>
     <div class="facts">
       <p class="section-kicker">Announcements:</p>
-      <p class="video-title">Duel season 2:</p>
-      <div class="hero-video-wrap" style="position:relative; max-width:540px; border-radius:3px; overflow:hidden;">
-        <video id="socialAnnounceVideo" src="assets/duel/season2-info.mp4" poster="assets/duel/season2-info-poster.jpg" preload="none" playsinline controlsList="nodownload noremoteplayback" disablePictureInPicture oncontextmenu="return false;" style="width:100%; aspect-ratio:16/9; display:block; background:#000;"></video>
-        <button id="socialAnnouncePlay" type="button" aria-label="Play video" style="position:absolute; inset:0; margin:auto; width:64px; height:64px; padding:0; border-radius:50%; background:rgba(0,0,0,.4); border:2px solid #fff; display:flex; align-items:center; justify-content:center; cursor:pointer;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" style="margin-left:3px;"><path d="M8 5v14l11-7z"/></svg>
-        </button>
+      <div class="announce-feed">
+        <div class="announce-scroll">
+          <p class="video-title">Press release:</p>
+          <a class="announce-image" href="https://www.instagram.com/p/DdeIR6Ao-Po/" target="_blank" rel="noopener noreferrer">
+            <img src="assets/social/press-release-2026-09-19.jpg" width="720" height="720" loading="lazy"
+                 alt="Press release dated 19.09.2026, signed Ossi.">
+          </a>
+          <p class="video-title">Duel season 2:</p>
+          <div class="hero-video-wrap" style="position:relative; max-width:540px; border-radius:3px; overflow:hidden;">
+            <video id="socialAnnounceVideo" src="assets/duel/season2-info.mp4" poster="assets/duel/season2-info-poster.jpg" preload="none" playsinline controlsList="nodownload noremoteplayback" disablePictureInPicture oncontextmenu="return false;" style="width:100%; aspect-ratio:16/9; display:block; background:#000;"></video>
+            <button id="socialAnnouncePlay" type="button" aria-label="Play video" style="position:absolute; inset:0; margin:auto; width:64px; height:64px; padding:0; border-radius:50%; background:rgba(0,0,0,.4); border:2px solid #fff; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" style="margin-left:3px;"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+        </div>
       </div>
       <script>
         (function(){
           var video = document.getElementById('socialAnnounceVideo');
           var btn = document.getElementById('socialAnnouncePlay');
+          // Open at 75% rather than full: this plays inline on a page nobody
+          // arrived at for a video. Set on the element rather than per play, so
+          // it holds however playback starts and still gives way the moment a
+          // viewer touches the volume control. iOS ignores scripted volume - it
+          // keeps audio on the hardware buttons - so there this is simply a no-op.
+          video.volume = 0.75;
           btn.addEventListener('click', function(){
             video.setAttribute('controls', '');
             video.play();
           });
           video.addEventListener('play', function(){ btn.style.display = 'none'; });
           video.addEventListener('ended', function(){ btn.style.display = 'flex'; video.removeAttribute('controls'); });
+        })();
+      </script>
+      <script>
+        (function(){
+          var feed = document.querySelector('.announce-feed');
+          if (!feed) return;
+          var box = feed.querySelector('.announce-scroll');
+          // Thin the fade out over the last FADE px of travel, so it tracks
+          // how much is still below instead of switching off at the bottom.
+          var FADE = 56;
+          function sync(){
+            var left = box.scrollHeight - box.clientHeight - box.scrollTop;
+            var f = Math.max(0, Math.min(1, left / FADE));
+            feed.style.setProperty('--fade', f.toFixed(3));
+          }
+          box.addEventListener('scroll', sync, { passive: true });
+          window.addEventListener('resize', sync);
+          window.addEventListener('load', sync);
+          Array.prototype.forEach.call(box.querySelectorAll('img'), function(img){
+            img.addEventListener('load', sync);
+          });
+          if (window.ResizeObserver) { new ResizeObserver(sync).observe(box); }
+          sync();
         })();
       </script>
     </div>

@@ -161,6 +161,12 @@
       (function(){
         var video = document.getElementById('s2video');
         var btn = document.getElementById('s2play');
+        // Open at 75% rather than full: this plays inline on a page nobody
+        // arrived at for a video. Set on the element rather than per play, so
+        // it holds however playback starts and still gives way the moment a
+        // viewer touches the volume control. iOS ignores scripted volume - it
+        // keeps audio on the hardware buttons - so there this is simply a no-op.
+        video.volume = 0.75;
         btn.addEventListener('click', function(){
           video.setAttribute('controls', '');
           video.play();
