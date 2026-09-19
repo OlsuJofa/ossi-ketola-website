@@ -96,7 +96,16 @@ a{ color:inherit; }
 .site-footer-bottom{
   margin-top:24px; padding-top:20px; border-top:1px solid var(--border);
   font-family:var(--body); letter-spacing:0.02em; font-size:12.5px; color:var(--muted);
+  display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;
 }
+/* Ossi's own channels, opposite the copyright line. One-colour marks drawn in
+   currentColor so they inherit the link colour instead of carrying four brand
+   palettes into a monochrome site, and with no chrome around them - the
+   copyright row should stay a thin line, not grow into a second nav. */
+.footer-social{ display:flex; align-items:center; gap:15px; }
+.footer-social-link{ display:inline-flex; color:var(--muted); transition:color .15s ease; }
+.footer-social-link:hover, .footer-social-link:focus-visible{ color:var(--gold-bright); }
+.footer-social-link svg{ display:block; }
 
 /* ---- hero ---- */
 .hero{ position:relative; overflow:hidden; padding:72px 0 0; border-bottom:1px solid var(--border); }
@@ -266,11 +275,27 @@ a{ color:inherit; }
   0%,100%{ opacity:0; }
   50%{ opacity:calc(var(--k) * 0.12); }
 }
+/* The cloth's shadow on the ground (About page). It is one flat shape rather
+   than 42 strips, so it cannot ripple; instead it stretches and leans on the
+   same 2.6s loop, a quarter cycle behind the cloth like .flag-shade, which
+   reads as a shadow of cloth filling and slackening. fill-box puts the origin
+   at the pole end of the shape, so the far tip travels furthest and the end
+   touching the pole stays put. */
+.crown-flag .flag-cast{
+  transform-box:fill-box; transform-origin:right bottom;
+  animation:flag-cast 2.6s ease-in-out infinite;
+  animation-delay:-3.25s;
+}
+@keyframes flag-cast{
+  0%,100%{ transform:scaleX(0.972) skewY(0.55deg); opacity:0.048; }
+  50%{ transform:scaleX(1.028) skewY(-0.55deg); opacity:0.076; }
+}
 /* Reduced motion: no animation at all (the global rule below only shortens
    durations, which would make an infinite loop flicker); each strip keeps
    its inline mid-wave offset, so the flag still reads as cloth. */
 @media (prefers-reduced-motion:reduce){
-  .crown-flag .flag-strip, .crown-flag .flag-shade{ animation:none !important; }
+  .crown-flag .flag-strip, .crown-flag .flag-shade,
+  .crown-flag .flag-cast{ animation:none !important; }
 }
 .hero .kicker{
   font-family:var(--body); letter-spacing:0.02em; font-size:13px; color:var(--gold-bright);
